@@ -1,0 +1,19 @@
+           ==================================================           
+=========='                                                 '===========
+======           Docker & Jenkins under Supervisor               =======
+==========.                                                 .===========
+           ==================================================
+           
+           An image with Docker and Jenkins running in the
+           same container.
+           
+           It also includes the docker plugin.
+
+
+
+
+-------------------------------  Run   ---------------------------------
+1. docker build --tag="docker-and-jenkins" .
+2. docker run -t --privileged -p 8080:8080 docker-and-jenkins
+
+The -t flag makes sure we can exit the container by hitting CTR+C
