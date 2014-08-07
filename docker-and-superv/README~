@@ -1,0 +1,42 @@
+           ==================================================           
+=========='                                                 '===========
+======          Simple docker-in-container base image            =======
+==========.                                                 .===========
+           ==================================================
+           
+           A simple image with docker inside. If you modify
+           something, make sure the docker.io service is
+           running.
+
+
+
+-------------------------------  Run   ---------------------------------
+1. docker build --tag="docker-in-container" .
+2. docker run -t --privileged docker-in-container
+
+The -t flag makes sure we can exit the container by hitting CTR+C
+
+
+
+
+---------------------------  Description   -----------------------------
+This runs a container with docker inside. A dummy "tail -f" command is
+followed after starting the docker service. This is done solely to keep
+the service alive.
+
+To enter the container and create new containers inside of it you either
+have to edit the Dockerfile, use other tools like nsenter or use a
+process manager .
+
+
+
+
+
+----------------------------  Remarks   --------------------------------
+If you want nested containers to talk to the host you need to map the
+ports correctly from each nested container to its outer container so
+that they create a "mapped port" link.
+
+For example for a host <---> cont1 <---> cont2 communication on
+port 8000 you want to run consequently the -t flag with the correct
+mapping 8000:8000 on the host and cont1.

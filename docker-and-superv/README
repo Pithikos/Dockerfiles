@@ -1,0 +1,28 @@
+           ==================================================           
+=========='                                                 '===========
+======          docker-in-container under supervisor             =======
+==========.                                                 .===========
+           ==================================================
+           
+           A simple image with docker inside running under supervisor.
+
+
+
+
+-------------------------------  Run   ---------------------------------
+1. docker build --tag="docker-and-superv" .
+2. docker run -t --privileged docker-and-superv
+
+The -t flag makes sure we can exit the container by hitting CTR+C
+
+
+
+
+---------------------------  Description   -----------------------------
+This runs a container with docker daemon under supervisor. To check if
+the daemon is running you can type "pidof docker.io". service or init.d
+won't work.
+
+You can add your own daemons and programs by adding you apt-get
+lines in the Dockerfile and accordingly adding the correct entries
+for the supervisor so that they autostart.
