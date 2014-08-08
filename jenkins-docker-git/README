@@ -28,5 +28,7 @@ the below:
   2. docker run -t --privileged -p 8080:8080 jenkins-docker-git
 
 The -t flag makes sure we can exit the container by hitting CTR+C
-Pay attention to the dot character in the end of the docker's build
-command.
+
+If you want your jobs to remain after closing the container then
+you should start your container with -v <path on host>:/root/.jenkins/jobs
+replacing <path on host> with a folder that will be used for storing the jobs.
