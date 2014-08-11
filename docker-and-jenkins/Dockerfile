@@ -27,7 +27,8 @@ RUN apt-get update -qq
 RUN apt-get install -qqy jenkins
 
 # Install plugins
-ADD http://updates.jenkins-ci.org/latest/docker-build-step.hpi /root/.jenkins/plugins/docker-build-step.jpi
+# THIS WON'T WORK: The plugin seems to be based on a so called "slave" with docker.
+#ADD http://updates.jenkins-ci.org/latest/docker-build-step.hpi /root/.jenkins/plugins/docker-build-step.jpi
 
 
 
