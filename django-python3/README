@@ -1,0 +1,35 @@
+           ==================================================
+=========='                                                  '==========
+======                     Django barebones                       ======
+==========.                                                  .==========
+           ==================================================
+           
+           
+           Barebones Django with Python3.
+           
+           User manos is created but you could create any user that is
+           going to be in the host machine. That way, files created
+           inside the container and are shared with host, become
+           accesible by the user in both the container and the host.
+
+
+
+
+================================  Run  =================================
+
+Make sure you are in the same folder as the Dockerfile and run
+the below:
+
+  1. mkdir /home/$USER/django-projects
+  2. docker build --tag="django" .
+  3. docker run -i -t -p 8000:8000 -u manos -w /home/django-projects -v /home/$USER/django-projects:/home/django-projects django bash
+
+
+Replace <host src> with the folder with the source code for your django
+projects. The source will be mounted at /home/django-projects
+
+The flag -u is used so we login in as the user created in the dockerfile
+ (which is manos if you haven't changed it).
+ 
+The flag -w is so we enter the specific directory with the django
+projects.
