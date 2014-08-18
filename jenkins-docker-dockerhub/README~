@@ -1,0 +1,34 @@
+           ==================================================
+=========='                                                  '==========
+======            Jenkins with Git and Docker support             ======
+==========.                                                  .==========
+           ==================================================
+           
+           An image with Jenkins, Git and Docker, all running
+           inside the same container.
+           
+           It also includes the docker and github plugin.
+           
+           The Dockerfile will always build the latest Jenkins,
+           Git, Docker and their plugins for the specified base
+           image (Ubuntu 14.04 by default).
+           
+           The Docker daemon and the Jenkins daemon are running
+           under Supervisord (a process manager).
+
+
+
+
+================================  Run  =================================
+
+Make sure you are in the same folder as the Dockerfile and run
+the below:
+
+  1. docker build --tag="jenkins-docker-git" .
+  2. docker run -t --privileged -p 8080:8080 jenkins-docker-git
+
+The -t flag makes sure we can exit the container by hitting CTR+C
+
+If you want your jobs to remain after closing the container then
+you should start your container with -v <path on host>:/root/.jenkins/jobs
+replacing <path on host> with a folder that will be used for storing the jobs.
