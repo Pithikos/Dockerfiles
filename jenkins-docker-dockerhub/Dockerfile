@@ -19,9 +19,8 @@ VOLUME /var/lib/docker
 
 # ------------------------ Git ----------------------------
 
-# Install docker
+# Install git
 RUN apt-get install -qqy git
-
 
 
 # ---------------------- JENKINS --------------------------
