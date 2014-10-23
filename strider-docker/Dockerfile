@@ -39,4 +39,6 @@ RUN echo 'command=/usr/local/bin/strider' >> /etc/supervisord.conf
 
 
 USER strider
+ENV HOME /home/strider
+WORKDIR /home/strider
 CMD supervisord --nodaemon -c /etc/supervisord.conf
