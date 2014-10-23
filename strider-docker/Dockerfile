@@ -31,16 +31,15 @@ RUN mkdir -p /data/db && chown -R strider /data
 RUN apt-get install -qqy supervisor
 RUN echo_supervisord_conf > /etc/supervisord.conf
 RUN echo '[program:docker]'               >> /etc/supervisord.conf
-RUN echo 'user=root'                      >> /etc/supervisord.conf
 RUN echo 'command=/usr/bin/docker.io -d'  >> /etc/supervisord.conf
 RUN echo '[program:mongo]'                >> /etc/supervisord.conf
+RUN echo 'user=strider'                   >> /etc/supervisord.conf
 RUN echo 'command=/usr/bin/mongod'        >> /etc/supervisord.conf
 RUN echo '[program:strider]'              >> /etc/supervisord.conf
+RUN echo 'user=strider'                   >> /etc/supervisord.conf
 RUN echo 'command=/usr/local/bin/strider' >> /etc/supervisord.conf
-
+CMD supervisord --nodaemon -c /etc/supervisord.conf
 
 USER strider
 ENV HOME /home/strider
 WORKDIR /home/strider
-
-CMD supervisord --nodaemon -c /etc/supervisord.conf
