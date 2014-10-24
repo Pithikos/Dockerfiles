@@ -4,6 +4,11 @@ MAINTAINER manossef@gmail.com
 EXPOSE 3000
 
 
+# ----------------------- USER ---------------------------
+RUN useradd -m strider
+RUN echo 'strider ALL=(ALL) NOPASSWD: /usr/bin/supervisord' >> /etc/sudoers
+
+
 # ---------------------- DOCKER --------------------------
 RUN apt-get update -qq
 RUN apt-get install -qqy docker.io
@@ -24,14 +29,20 @@ RUN apt-get update -qq && apt-get install -qqy mongodb-org
 RUN mkdir -p /data/db # && chown -R strider /data
 
 
+
 # -------------------- SUPERVISOR -------------------------
 RUN apt-get install -qqy supervisor
 RUN echo_supervisord_conf > /etc/supervisord.conf
 RUN echo '[program:docker]'                >> /etc/supervisord.conf
 RUN echo 'command=service docker.io start' >> /etc/supervisord.conf
 RUN echo '[program:mongo]'                 >> /etc/supervisord.conf
-RUN echo 'command=/usr/bin/mongod'         >> /etc/supervisord.conf
+RUN echo 'command=mongod'                  >> /etc/supervisord.conf
 RUN echo '[program:strider]'               >> /etc/supervisord.conf
+RUN echo 'user=strider'                    >> /etc/supervisord.conf
 RUN echo 'command=/usr/local/bin/strider'  >> /etc/supervisord.conf
 
-CMD supervisord --nodaemon -c /etc/supervisord.conf
+
+CMD sudo supervisord --nodaemon -c /etc/supervisord.conf
+ENV HOME /home/strider
+WORKDIR /home/strider
+USER strider
