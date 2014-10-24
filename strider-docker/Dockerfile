@@ -7,6 +7,8 @@ EXPOSE 3000
 # ----------------------- USER ---------------------------
 RUN useradd -m strider
 RUN echo 'strider ALL=(ALL) NOPASSWD: /usr/bin/supervisord' >> /etc/sudoers
+RUN groupadd docker
+RUN gpasswd -a strider docker
 
 
 # ---------------------- DOCKER --------------------------
