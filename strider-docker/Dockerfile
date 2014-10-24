@@ -4,17 +4,18 @@ MAINTAINER manossef@gmail.com
 EXPOSE 3000
 
 
+# ----------------------- USER ---------------------------
+RUN useradd -m strider
+RUN echo 'strider ALL=(ALL) NOPASSWD: /usr/bin/supervisord' >> /etc/sudoers
+RUN groupadd docker
+RUN gpasswd -a strider docker
+
+
 # ---------------------- DOCKER --------------------------
 RUN apt-get update -qq
 RUN apt-get install -qqy docker.io
 RUN ln -s /usr/bin/docker.io /usr/local/bin/docker
 VOLUME /var/lib/docker
-
-
-# ----------------------- USER ---------------------------
-RUN useradd -m strider
-RUN echo 'strider ALL=(ALL) NOPASSWD: /usr/bin/supervisord' >> /etc/sudoers
-RUN gpasswd -a strider docker
 
 
 # --------------------- Strider ---------------------------
@@ -28,7 +29,6 @@ RUN echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen
     tee /etc/apt/sources.list.d/mongodb.list
 RUN apt-get update -qq && apt-get install -qqy mongodb-org
 RUN mkdir -p /data/db # && chown -R strider /data
-
 
 
 # -------------------- SUPERVISOR -------------------------
