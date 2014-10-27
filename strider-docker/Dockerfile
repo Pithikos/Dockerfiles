@@ -7,10 +7,10 @@ ENV IMAGE_TYPE ci_software_suite
 
 
 # ----------------------- USER ---------------------------
-#RUN useradd -m strider
-#RUN echo 'strider ALL=(ALL) NOPASSWD: /usr/bin/supervisord' >> /etc/sudoers
-#RUN groupadd -r docker
-#RUN gpasswd -a strider docker
+RUN useradd -m strider
+RUN echo 'strider ALL=(ALL) NOPASSWD: /usr/bin/supervisord' >> /etc/sudoers
+RUN groupadd -r docker
+RUN gpasswd -a strider docker
 
 
 # ---------------------- DOCKER --------------------------
@@ -23,6 +23,7 @@ VOLUME /var/lib/docker
 # --------------------- Strider ---------------------------
 RUN apt-get install -qqy nodejs nodejs-legacy npm git
 RUN npm install -g strider
+RUN mkdir /home/strider/.strider && chown -R strider /home/strider/.strider
 
 
 # ---------------------- Mongo ----------------------------
@@ -45,9 +46,8 @@ RUN echo '[program:strider]'               >> /etc/supervisord.conf
 RUN echo 'command=/usr/local/bin/strider'  >> /etc/supervisord.conf
 
 
-#USER strider
-#ENV HOME /home/strider
-#WORKDIR /home/strider/.strider
+USER strider
+ENV HOME /home/strider
+WORKDIR /home/strider/.strider
 
-#CMD sudo supervisord --nodaemon -c /etc/supervisord.conf
-CMD supervisord --nodaemon -c /etc/supervisord.conf
+CMD sudo supervisord --nodaemon -c /etc/supervisord.conf
