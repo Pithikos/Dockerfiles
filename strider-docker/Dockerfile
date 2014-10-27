@@ -2,13 +2,15 @@ FROM ubuntu:14.04
 MAINTAINER manossef@gmail.com
 
 EXPOSE 3000
+ENV IMAGE_NAME strider
+ENV IMAGE_TYPE ci_software_suite
 
 
 # ----------------------- USER ---------------------------
-RUN useradd -m strider
-RUN echo 'strider ALL=(ALL) NOPASSWD: /usr/bin/supervisord' >> /etc/sudoers
-RUN groupadd docker
-RUN gpasswd -a strider docker
+#RUN useradd -m strider
+#RUN echo 'strider ALL=(ALL) NOPASSWD: /usr/bin/supervisord' >> /etc/sudoers
+#RUN groupadd -r docker
+#RUN gpasswd -a strider docker
 
 
 # ---------------------- DOCKER --------------------------
@@ -39,11 +41,13 @@ RUN echo 'command=service docker.io start' >> /etc/supervisord.conf
 RUN echo '[program:mongo]'                 >> /etc/supervisord.conf
 RUN echo 'command=mongod'                  >> /etc/supervisord.conf
 RUN echo '[program:strider]'               >> /etc/supervisord.conf
-RUN echo 'user=strider'                    >> /etc/supervisord.conf
+#RUN echo 'user=strider'                   >> /etc/supervisord.conf
 RUN echo 'command=/usr/local/bin/strider'  >> /etc/supervisord.conf
 
 
-CMD sudo supervisord --nodaemon -c /etc/supervisord.conf
-ENV HOME /home/strider
-WORKDIR /home/strider
-USER strider
+#USER strider
+#ENV HOME /home/strider
+#WORKDIR /home/strider/.strider
+
+#CMD sudo supervisord --nodaemon -c /etc/supervisord.conf
+CMD supervisord --nodaemon -c /etc/supervisord.conf
