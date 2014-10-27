@@ -14,12 +14,10 @@ RUN gpasswd -a strider docker
 
 
 # ---------------------- DOCKER --------------------------
-RUN apt-get update -qq
-RUN apt-get install -qqy apt-transport-https
+RUN apt-get update -qq && apt-get install -qqy apt-transport-https
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
 RUN sh -c "echo deb https://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
-RUN apt-get update -qq
-RUN apt-get install -qqy lxc-docker
+RUN apt-get update -qq && apt-get install -qqy lxc-docker
 RUN ln -s /usr/bin/docker.io /usr/local/bin/docker
 VOLUME /var/lib/docker
 
@@ -42,7 +40,7 @@ RUN mkdir -p /data/db # && chown -R strider /data
 RUN apt-get install -qqy supervisor
 RUN echo_supervisord_conf > /etc/supervisord.conf
 RUN echo '[program:docker]'                >> /etc/supervisord.conf
-RUN echo 'command=service docker.io start' >> /etc/supervisord.conf
+RUN echo 'command=service docker start'    >> /etc/supervisord.conf
 RUN echo '[program:mongo]'                 >> /etc/supervisord.conf
 RUN echo 'command=mongod'                  >> /etc/supervisord.conf
 RUN echo '[program:strider]'               >> /etc/supervisord.conf
