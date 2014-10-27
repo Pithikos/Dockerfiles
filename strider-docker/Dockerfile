@@ -15,7 +15,11 @@ RUN gpasswd -a strider docker
 
 # ---------------------- DOCKER --------------------------
 RUN apt-get update -qq
-RUN apt-get install -qqy docker.io
+RUN apt-get install -qqy apt-transport-https
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+RUN sh -c "echo deb https://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
+RUN apt-get update -qq
+RUN apt-get install -qqy lxc-docker
 RUN ln -s /usr/bin/docker.io /usr/local/bin/docker
 VOLUME /var/lib/docker
 
