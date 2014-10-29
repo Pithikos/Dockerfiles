@@ -44,7 +44,7 @@ RUN echo 'command=service docker start'    >> /etc/supervisord.conf
 RUN echo '[program:mongo]'                 >> /etc/supervisord.conf
 RUN echo 'command=mongod'                  >> /etc/supervisord.conf
 RUN echo '[program:strider]'               >> /etc/supervisord.conf
-#RUN echo 'user=strider'                   >> /etc/supervisord.conf
+RUN echo 'user=strider'                   >> /etc/supervisord.conf
 RUN echo 'command=/usr/local/bin/strider'  >> /etc/supervisord.conf
 
 
