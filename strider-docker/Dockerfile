@@ -4,7 +4,7 @@ MAINTAINER manossef@gmail.com
 EXPOSE 3000
 ENV IMAGE_NAME strider
 ENV IMAGE_TYPE ci_software_suite
-
+ENV LANG C.UTF-8
 
 # ----------------------- USER ---------------------------
 RUN useradd -m strider
