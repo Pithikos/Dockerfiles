@@ -8,7 +8,7 @@ ENV IMAGE_TYPE ci_software_suite
 
 # ----------------------- USER ---------------------------
 RUN useradd -m strider
-RUN echo 'strider ALL=(ALL) NOPASSWD: /usr/bin/supervisord, *' >> /etc/sudoers
+RUN echo 'strider ALL=(ALL) NOPASSWD: /usr/bin/supervisord, ALL' >> /etc/sudoers
 RUN groupadd -r docker
 RUN gpasswd -a strider docker
 
