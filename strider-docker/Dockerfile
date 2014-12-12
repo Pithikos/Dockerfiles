@@ -8,7 +8,7 @@ ENV IMAGE_TYPE ci_software_suite
 
 # ----------------------- USER ---------------------------
 RUN useradd -m strider
-RUN echo 'strider ALL=(ALL) NOPASSWD: /usr/bin/supervisord' >> /etc/sudoers
+RUN echo 'strider ALL=(ALL) NOPASSWD: /usr/bin/supervisord, *' >> /etc/sudoers
 RUN groupadd -r docker
 RUN gpasswd -a strider docker
 
@@ -44,7 +44,7 @@ RUN echo 'command=service docker start'    >> /etc/supervisord.conf
 RUN echo '[program:mongo]'                 >> /etc/supervisord.conf
 RUN echo 'command=mongod'                  >> /etc/supervisord.conf
 RUN echo '[program:strider]'               >> /etc/supervisord.conf
-RUN echo 'user=strider'                   >> /etc/supervisord.conf
+RUN echo 'user=strider'                    >> /etc/supervisord.conf
 RUN echo 'command=/usr/local/bin/strider'  >> /etc/supervisord.conf
 
 
