@@ -4,10 +4,9 @@ Strider CD with Docker support
 An image with StriderCD and Docker, all running
 inside the same container.
            
-The latest Strider will be built and the `preprocess` script
-in this file will make sure that the appropriate docker
-container is installed. (Notice if you update your machine's
-Docker you will need to rebuild the image.)
+The latest Strider will be built and running the `preprocess` script
+will make sure that the appropriate docker container is installed.
+(Notice if you update your machine's Docker you will need to rebuild the image.)
 
 
 Run
