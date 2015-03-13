@@ -35,7 +35,7 @@ there is not even a default user. To add a user you can either use the
 
 Once in the container simply run:
 
-  1. strider addUser
+  1. `strider addUser`
   
 Create the user following the instructions. Once done, you should be able
 and login at [http://localhost:3000](http://localhost:3000) without
