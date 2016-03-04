@@ -15,7 +15,7 @@ you can build the image.
 
 By default postgres user `test` will be created and the rake commands
  `rake db:create && rake db:migrate` will be run every time you run a container
- from this image. To change this things have a look at the Dockerfile.
+ from this image. If you wish to chenge this behaviour have a look at the Dockerfile.
 
 
 Run container
